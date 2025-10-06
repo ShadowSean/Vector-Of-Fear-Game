@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class Door : MonoBehaviour
 {
-    public GameObject door_closed, door_opened, intText;
+    public GameObject door_closed, door_opened, intText,playerScope;
 
     //public AudioSource open, close;
 
@@ -17,12 +17,14 @@ public class Door : MonoBehaviour
         {
             if (opened == false)
             {
+                playerScope.SetActive(false);
                 intText.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     door_closed.SetActive(false);
                     door_opened.SetActive(true);
                     intText.SetActive(false);
+                    playerScope.SetActive(true);
                     //open.Play();
                     StartCoroutine(repeat());
                     opened = true;
@@ -36,6 +38,7 @@ public class Door : MonoBehaviour
         if (other.CompareTag("MainCamera"))
         {
             intText.SetActive(false);
+            playerScope.SetActive(true);
         }
     }
 
