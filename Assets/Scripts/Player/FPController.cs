@@ -23,9 +23,12 @@ public class FPController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    private Stamina stamina;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        stamina = FindFirstObjectByType<Stamina>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -37,9 +40,11 @@ public class FPController : MonoBehaviour
         Vector3 right = transform.TransformDirection(Vector3.right);
 
         //When shift is pressed sprint
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+        bool hasStamina = stamina != null && stamina.hasStamina();
+        bool isRunningKey = Input.GetKey(KeyCode.LeftShift) && hasStamina;
+        
+        float curSpeedX = canMove ? (isRunningKey ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
+        float curSpeedY = canMove ? (isRunningKey ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDir.y;
         moveDir = (forward * curSpeedX) + (right * curSpeedY);
 
