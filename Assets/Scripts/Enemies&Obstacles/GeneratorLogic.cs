@@ -7,6 +7,7 @@ public class GeneratorLogic : MonoBehaviour
     [Header("Generator UI")]
     public GameObject repairAndGenerator;
     public Slider repairPercentage;
+    public GameObject repairedOne;
 
     [Header("Base Settings")]
     public GameObject partsNeeded, playerCursor;
@@ -15,6 +16,7 @@ public class GeneratorLogic : MonoBehaviour
 
     bool inRange;
     public static bool isFixed;
+    public GameObject secondGenerator;
 
     private void Start()
     {
@@ -37,6 +39,8 @@ public class GeneratorLogic : MonoBehaviour
                     {
                         repairPercentage.value = repairPercentage.maxValue;
                         isFixed = true;
+                        secondGenerator.SetActive(true);
+                        StartCoroutine(GeneratorRepairedOne());
                         Debug.Log("Power Restored.");
                     }
                 }
@@ -80,6 +84,13 @@ public class GeneratorLogic : MonoBehaviour
         partsNeeded.SetActive(true);
         yield return new WaitForSeconds(textDuration);
         partsNeeded.SetActive(false);
+    }
+
+    IEnumerator GeneratorRepairedOne()
+    {
+        repairedOne.SetActive(true);
+        yield return new WaitForSeconds(textDuration);
+        repairedOne.SetActive(false);
     }
 
 }
