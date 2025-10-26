@@ -3,6 +3,8 @@ using UnityEngine;
 public class FlashLight : MonoBehaviour
 {
     public GameObject flashlight_ground, inticon, flashlight_player,playerCursor;
+
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("MainCamera"))
