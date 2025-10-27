@@ -1,26 +1,15 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class FlashLight : MonoBehaviour
+public class TaserrodLogic : MonoBehaviour
 {
-    public GameObject flashlight_ground, inticon, flashlight_player,playerCursor,flashlightIcon;
+    public GameObject taserRod_ground, inticon, taserRod_player, playerCursor, taserIcon;
 
     private ItemSwitcher itemSwitcher;
-
-    bool flashlightOn;
 
     private void Start()
     {
         itemSwitcher = FindFirstObjectByType<ItemSwitcher>();
-        
-
     }
-
-    
-
-    
-
-    
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("MainCamera"))
@@ -29,13 +18,13 @@ public class FlashLight : MonoBehaviour
             playerCursor.SetActive(false);
             if (Input.GetKeyDown(KeyCode.E))
             {
-                flashlight_ground.SetActive(false);
+                taserRod_ground.SetActive(false);
                 inticon.SetActive(false);
                 playerCursor.SetActive(true);
-                flashlight_player.SetActive(true);
-                flashlightIcon.SetActive(true);
+                taserRod_player.SetActive(true);
+                taserIcon.SetActive(true);
 
-                itemSwitcher?.PickupFlashlight();
+                itemSwitcher?.PickupTaser();
             }
         }
     }
